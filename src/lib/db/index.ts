@@ -4,12 +4,12 @@
  * 使用 mysql2 连接池 + Drizzle ORM
  * 单例模式，避免创建多个连接池
  */
-import { drizzle } from "drizzle-orm/mysql2";
+import { drizzle, type MySql2Database } from "drizzle-orm/mysql2";
 import mysql from "mysql2/promise";
 import * as schema from "./schema";
 
 // 全局单例
-let dbInstance: ReturnType<typeof drizzle> | null = null;
+let dbInstance: MySql2Database<typeof schema> | null = null;
 let poolInstance: mysql.Pool | null = null;
 
 /** 获取 MySQL 连接池（单例） */
