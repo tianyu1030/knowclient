@@ -1,0 +1,43 @@
+{
+  "name": "knowclient",
+  "version": "0.1.0",
+  "private": true,
+  "description": "知客 KnowClient — AI客户管理应用",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:push": "drizzle-kit push",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio",
+    "checklist": "cat CHECKLIST.md"
+  },
+  "dependencies": {
+    "next": "^15.2.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "drizzle-orm": "^0.41.0",
+    "mysql2": "^3.11.0",
+    "openai": "^4.73.0",
+    "next-auth": "^5.0.0-beta.25",
+    "@auth/drizzle-adapter": "^1.7.0",
+    "lucide-react": "^0.468.0",
+    "clsx": "^2.1.0",
+    "tailwind-merge": "^2.6.0",
+    "class-variance-authority": "^0.7.1",
+    "date-fns": "^4.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "tailwindcss": "^3.4.0",
+    "postcss": "^8.4.0",
+    "autoprefixer": "^10.4.0",
+    "drizzle-kit": "^0.30.6",
+    "tsx": "^4.19.0"
+  }
+}

@@ -1,0 +1,31 @@
+# 知客 KnowClient — .gitignore
+
+# 依赖
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# 环境变量（包含敏感信息，不要提交）
+.env
+.env.local
+.env.production
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# 数据库迁移（提交迁移文件，但不提交本地数据库）
+*.db
+*.sqlite
+
+# 操作系统
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

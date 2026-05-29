@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 知客 KnowClient — 全局样式 */
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Microsoft YaHei", "Helvetica Neue", sans-serif;
+  background: #f5f6f8;
+  color: #1a1a2e;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #d0d5e0;
+  border-radius: 4px;
+}
+
+/* 移动端容器居中 */
+.app-container {
+  max-width: 420px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #f5f6f8;
+}
+
+/* AI 发光卡片 */
+.ai-card {
+  background: linear-gradient(135deg, #f8f7ff, #f0edff);
+  border: 1px solid #e2dcff;
+}
+
+/* 看板横向滚动 */
+.kanban-scroll {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.kanban-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* 动画 */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
