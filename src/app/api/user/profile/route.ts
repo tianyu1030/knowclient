@@ -14,6 +14,7 @@ export async function PUT(req: NextRequest) {
     return NextResponse.json({ error: "未登录" }, { status: 401 });
   }
 
+  const userId = session.user.id;
   const { name } = await req.json();
 
   if (!name || !name.trim()) {
@@ -24,7 +25,7 @@ export async function PUT(req: NextRequest) {
   await db
     .update(schema.users)
     .set({ name: name.trim() })
-    .where(eq(schema.users.id, session.user.id));
+    .where(eq(schema.users.id, userId));
 
   return NextResponse.json({ name: name.trim() });
 }

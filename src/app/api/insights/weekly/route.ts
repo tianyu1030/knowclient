@@ -25,11 +25,12 @@ export async function GET() {
     return NextResponse.json({ error: "未登录" }, { status: 401 });
   }
 
+  const userId = session.user.id;
   const db = getDb();
 
   // 1. 检查缓存
   const user = await db.query.users.findFirst({
-    where: (u, { eq }) => eq(u.id, session.user.id),
+    where: (u, { eq }) => eq(u.id, userId),
   });
 
   if (user?.weeklyReport && user?.weeklyReportAt) {
@@ -44,7 +45,7 @@ export async function GET() {
   }
 
   // 2. 缓存过期或不存在，重新生成
-  const clients = await getClients({ userId: session.user.id });
+  const clients = await getClients({ userId });
 
   const now = new Date();
   const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
@@ -99,7 +100,7 @@ export async function GET() {
       weeklyReport: report,
       weeklyReportAt: new Date(),
     })
-    .where(eq(schema.users.id, session.user.id));
+    .where(eq(schema.users.id, userId));
 
   return NextResponse.json({
     report,

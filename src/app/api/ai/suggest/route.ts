@@ -16,10 +16,11 @@ export async function POST() {
     return NextResponse.json({ error: "未登录" }, { status: 401 });
   }
 
+  const userId = session.user.id;
   const db = getDb();
 
   // 获取用户所有客户
-  const clients = await getClients({ userId: session.user.id });
+  const clients = await getClients({ userId });
 
   // 查询今日已 dismiss 的记录
   const todayStart = new Date();
@@ -30,7 +31,7 @@ export async function POST() {
     .from(schema.aiSuggestions)
     .where(
       and(
-        eq(schema.aiSuggestions.userId, session.user.id),
+        eq(schema.aiSuggestions.userId, userId),
         eq(schema.aiSuggestions.dismissed, 1),
         gte(schema.aiSuggestions.createdAt, todayStart)
       )
