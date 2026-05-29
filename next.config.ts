@@ -1,10 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Server Actions（Next.js 15 中已稳定，不再需要 experimental 包装）
-  serverActions: {
-    bodySizeLimit: "2mb",
-  },
   // mysql2 是 Node.js 原生模块，禁止 webpack 打包它（Edge Runtime 用它就炸）
   // 标记为 external 后只在 Node.js Runtime（API Route / Server Action）加载
   serverExternalPackages: ["mysql2"],
