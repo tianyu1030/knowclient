@@ -48,29 +48,25 @@ export async function getClients(params: {
 }) {
   const db = getDb();
 
-  let query = db
-    .select()
-    .from(schema.clients)
-    .where(eq(schema.clients.userId, params.userId));
+  // 动态构建条件数组，避免链式 .where() 的类型收窄问题
+  const conditions: any[] = [eq(schema.clients.userId, params.userId)];
 
-  // 搜索：匹配姓名、公司、标签
   if (params.search) {
     const term = `%${params.search}%`;
-    query = query.where(
-      or(
-        like(schema.clients.name, term),
-        like(schema.clients.company, term)
-      )
-    ) as any;
+    conditions.push(
+      or(like(schema.clients.name, term), like(schema.clients.company, term))
+    );
   }
 
-  // 阶段筛选
   if (params.stage) {
-    query = query.where(eq(schema.clients.stage, params.stage as any)) as any;
+    conditions.push(eq(schema.clients.stage, params.stage));
   }
 
-  // 默认按更新时间倒序
-  query = query.orderBy(desc(schema.clients.updatedAt));
+  const query = db
+    .select()
+    .from(schema.clients)
+    .where(and(...conditions))
+    .orderBy(desc(schema.clients.updatedAt));
 
   return query.execute();
 }
